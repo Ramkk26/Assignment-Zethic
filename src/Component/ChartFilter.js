@@ -3,6 +3,7 @@ import { Pie, Bar } from 'react-chartjs-2';
 import Data from "./UserData";
 import { Chart, ArcElement, Tooltip } from "chart.js";
 import PieChart from '../Component/PieChart';
+import PieCarAge from './PieCarAge';
 
 Chart.register(ArcElement, Tooltip);
 
@@ -126,7 +127,10 @@ const ChartFilter = () => {
       </label>
       <div className='chartFilter'>
       <PieChart ageRange={ageRange} />
-   
+      <div>
+        <h2>Car's Age</h2>
+   <PieCarAge ageRange ={ageRange}/>
+   </div>
       </div>
    
     </div>
