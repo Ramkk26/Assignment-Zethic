@@ -9,6 +9,12 @@ const PaginatedCarList = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [paginatedData, setPaginatedData] = useState([]);
+  function disableButton() {
+    const startIndex = (currentPage+1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const nextData = uniqueCars.slice(startIndex, endIndex);
+    return !nextData.length;
+  }
   useEffect(() => {
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -48,20 +54,22 @@ const PaginatedCarList = () => {
           />
           <div className="pagination_action">
             <button
-              className="pagination_btn"
+              className={currentPage == 0? "": "pagination_btn"}
               onClick={() =>
                 handlePageChange({ selectedIndex: currentPage - 1 })
               }
+              disabled={currentPage == 0}
             >
               Previous
             </button>
             <span className="pagination_text">{currentPage + 1}</span>
 
             <button
-              className="pagination_btn"
+              className={disableButton()? "" : "pagination_btn"}
               onClick={() =>
                 handlePageChange({ selectedIndex: currentPage + 1 })
               }
+              disabled={disableButton()}
             >
               Next
             </button>
